@@ -1,0 +1,20 @@
+###### xshokproxyhttps
+  xshokproxyhttps:
+    image: extremeshok/nginx-https-proxy:latest
+    environment:
+      - TZ=${TZ}
+      - PROXY_DOMAINS=example.com,example:80;office.example.com,https://collabora:9980+collabora-online.conf
+    volumes:
+      - vol-certificates:/certs/:ro
+    ports:
+      - 443:443
+    restart: unless-stopped
+    dns:
+      - ${IPV4_NETWORK:-172.22.1}.254
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=${SYSCTL_IPV6_DISABLED:-0}
+    networks:
+      network:
+        ipv4_address: ${IPV4_NETWORK:-172.22.1}.199
+        aliases:
+          - xshokproxyhttps

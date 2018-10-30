@@ -1,0 +1,14 @@
+server {
+    listen 8080 default_server;
+
+    server_name _;
+
+    access_log off;
+
+    location = /status {
+        access_log off;
+        vhost_traffic_status_display;
+        vhost_traffic_status_display_format html;
+    }
+
+}
