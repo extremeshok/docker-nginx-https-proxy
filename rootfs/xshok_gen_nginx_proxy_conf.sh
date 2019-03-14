@@ -24,6 +24,13 @@ if [[ ! -z $PROXY_DOMAINS ]]; then
       include="${proxy##*+}"
       proxy="${proxy%%+*}"
 
+      if [ "$DISABLE_CACHE" != "1" ] && [ "$DISABLE_CACHE" != "true" ] && [ "$DISABLE_CACHE" != "True" ]  && [ "$DISABLE_CACHE" != "TRUE" ] ; then
+        proxy_cache="proxy_cache my-cache;"
+      else
+        proxy_cache=""
+      fi
+
+
       if ! [[ "$proxy" =~ ^http:.*|^https:.* ]]; then
         #default to http if not supplied
         proxy="http://${proxy}"
@@ -66,7 +73,7 @@ if [[ ! -z $PROXY_DOMAINS ]]; then
 
         fi
         echo "==== Generating Nginx site config "====
-        sed  -e "s|TMPL_DOMAIN|${domain}|g" -e "s|TMPL_PROXY|${proxy}|g" -e "s|TMPL_INCLUDE|${include}|g" /etc/nginx/templates/site.conf > "/etc/nginx/sites.d/${domain}"
+        sed  -e "s|TMPL_DOMAIN|${domain}|g" -e "s|TMPL_PROXY|${proxy}|g" -e "s|TMPL_INCLUDE|${include}|g" -e "s|TMPL_PROXY_CACHE|${proxy_cache}" /etc/nginx/templates/site.conf > "/etc/nginx/sites.d/${domain}"
       fi
     done
   else
