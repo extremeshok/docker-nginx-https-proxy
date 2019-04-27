@@ -73,7 +73,7 @@ if [[ ! -z $PROXY_DOMAINS ]]; then
 
         fi
         echo "==== Generating Nginx site config "====
-        sed  -e "s|TMPL_DOMAIN|${domain}|g" -e "s|TMPL_PROXY|${proxy}|g" -e "s|TMPL_INCLUDE|${include}|g" -e "s|TMPL_PROXY_CACHE|${proxy_cache}" /etc/nginx/templates/site.conf > "/etc/nginx/sites.d/${domain}"
+        sed  -e "s|TMPL_DOMAIN|${domain}|g" -e "s|TMPL_PROXY|${proxy}|g" -e "s|TMPL_INCLUDE|${include}|g" -e "s|TMPL_PROXY_CACHE|${proxy_cache}|g" /etc/nginx/templates/site.conf > "/etc/nginx/sites.d/${domain}"
       fi
     done
   else
