@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+################################################################################
+# This is property of eXtremeSHOK.com
+# You are free to use, modify and distribute, however you may not remove this notice.
+# Copyright (c) Adrian Jon Kriel :: admin@extremeshok.com
+################################################################################
 
 
 if [[ -f "/certs/dhparam.pem" ]] ; then
@@ -85,4 +90,13 @@ fi
 if ! nginx -t ; then
   echo "FATAL ERROR:"
   nginx -T
+fi
+
+
+XS_MONTIOR_CERTS=${NGINX_MONTIOR_CERTS:-yes}
+
+
+if [ "$XS_MONTIOR_CERTS" == "yes" ] || [ "$XS_MONTIOR_CERTS" == "true" ] || [ "$XS_MONTIOR_CERTS" == "on" ] || [ "$XS_MONTIOR_CERTS" == "1" ] ; then
+  echo "Monitoring /certs for changes"
+  /xshok-monitor-certs.sh &
 fi
