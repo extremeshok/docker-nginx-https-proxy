@@ -90,6 +90,7 @@ fi
 if ! nginx -t ; then
   echo "FATAL ERROR:"
   nginx -T
+  sleep 1d
 fi
 
 
