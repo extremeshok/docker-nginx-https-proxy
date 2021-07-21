@@ -30,7 +30,7 @@ RUN \
   && mkdir -p /tmp/nginx_cache \
   && mkdir -p /etc/nginx/sites.d \
   && chown -R nginx:nginx /var/www \
-  && chmod 777 /xshok_gen_nginx_proxy_conf.sh \
+  && chmod 777 /xshok-gen-nginx-proxy-config.sh \
   && chmod 777 /xshok-monitor-certs.sh
 
 EXPOSE 443/tcp
